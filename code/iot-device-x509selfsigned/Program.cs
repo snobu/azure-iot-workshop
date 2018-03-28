@@ -20,8 +20,9 @@ namespace iot_device_x509selfsigned
             //CreateSelfSignedDevice(TransportType.Amqp, "selfsigneddevice");
             await ReceiveC2dAsync();
         }
-
-        // .secret file should contain the connection string and just that
+        
+        // Create an "IoTHubOwner.secret" file.
+        // The text file should contain the "iothubowner" connection string and just that. Example:
         // HostName=hubname.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=Th3KEy=
         private static string HubAdminConnectionString = File.ReadAllText("IoTHubOwner.secret");
         private static string HubUrl = $"{IOTHUB_INSTANCE_NAME}.azure-devices.net";
