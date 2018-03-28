@@ -17,6 +17,8 @@ Currently implemented device methods:
 * `reboot` - Invoke `reboot` shell command on device
 * `halt` - Invoke `halt -p` shell command on device
 
+Use the Azure Portal or [`iothub-explorer`](https://github.com/Azure/iothub-explorer) to send device methods.
+
 Node 8+ required, could work with 6+, but that's on you.
 
 Needs `fswebcam` on Linux and `imagesnap` on macOS. See comments in `app.js` for more.
