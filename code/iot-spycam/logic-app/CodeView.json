@@ -1,0 +1,92 @@
+{
+    "$connections": {
+        "value": {
+            "sendgrid": {
+                "connectionId": "/subscriptions/SUBSCRIPTION_ID/resourceGroups/LogicApps/providers/Microsoft.Web/connections/sendgrid",
+                "connectionName": "sendgrid",
+                "id": "/subscriptions/SUBSCRIPTION_ID/providers/Microsoft.Web/locations/westeurope/managedApis/sendgrid"
+            },
+            "servicebus": {
+                "connectionId": "/subscriptions/SUBSCRIPTION_ID/resourceGroups/LogicApps/providers/Microsoft.Web/connections/servicebus",
+                "connectionName": "servicebus",
+                "id": "/subscriptions/SUBSCRIPTION_ID/providers/Microsoft.Web/locations/westeurope/managedApis/servicebus"
+            }
+        }
+    },
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Parse_JSON": {
+                "inputs": {
+                    "content": "@decodeBase64(triggerBody()['ContentData'])",
+                    "schema": {
+                        "properties": {
+                            "deviceId": {
+                                "type": "string"
+                            },
+                            "vibrationLevel": {
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "runAfter": {},
+                "type": "ParseJson"
+            },
+            "Send_email_(V2)": {
+                "inputs": {
+                    "body": {
+                        "from": "poorlyfundedskynet@cyberdyne.com",
+                        "ishtml": true,
+                        "subject": "Alert from IoT Hub Critical Endpoint",
+                        "text": "<h2 style=\"color: red\">Critical</h2>\n\n<p>Device ID <strong>@{body('Parse_JSON')?['deviceId']}</strong> readout for vibration level is outside norms!</p>\n\n<h3>Vibration level value: @{body('Parse_JSON')?['vibrationLevel']}</h3>\n\n<h3>Proposed remedy action:</h3>\n<img src=\"https://orig00.deviantart.net/6fd1/f/2014/068/8/a/dee_dee__get_out_of_my_laboratory__by_dennistamayo-d79iqqi.jpg\" width=\"400\" />",
+                        "to": "ops@cyberdyne.com"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['sendgrid']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/mail/send"
+                },
+                "runAfter": {
+                    "Parse_JSON": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_a_message_is_received_in_a_queue_(auto-complete)": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['servicebus']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/@{encodeURIComponent(encodeURIComponent('critical'))}/messages/head",
+                    "queries": {
+                        "queueType": "Main"
+                    }
+                },
+                "recurrence": {
+                    "frequency": "Second",
+                    "interval": 10
+                },
+                "type": "ApiConnection"
+            }
+        }
+    }
+}

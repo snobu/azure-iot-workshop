@@ -1,0 +1,16 @@
+{
+  "name": "blob-to-faceapi",
+  "version": "0.3.11",
+  "description": "Upload blob to Face API and post result to Event Hub",
+  "main": "index.js",
+  "keywords": [
+    "azure-iot-hub",
+    "cognitive-services",
+    "azure-functions"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

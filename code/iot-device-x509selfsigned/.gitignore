@@ -1,0 +1,8 @@
+.DS_Store
+*.secret
+bin
+obj
+# ignore files in folder foo
+certs/*
+# but keep the folder
+!certs/.keep
