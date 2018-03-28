@@ -1,3 +1,4 @@
+# Microsoft Azure IoT Workshop
 
 ## Orientation
 
@@ -13,3 +14,5 @@
 ├── decks    # PowerPoint decks
 └── packet-capture    # A raw packet capture for HTTP, AMQP and MQTT after TLS decryption
 ```
+
+The hands-on lab is available at https://github.com/snobu/azureiothol201.
