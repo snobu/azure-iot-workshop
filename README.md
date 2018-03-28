@@ -16,3 +16,5 @@
 ```
 
 The hands-on lab is available at https://github.com/snobu/azureiothol201.
+
+Unless otherwise noted, all C# code in this repo runs on .NET Core.
