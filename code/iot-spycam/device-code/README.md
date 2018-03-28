@@ -5,7 +5,7 @@
 Add an `.env` file with the device connection string:
 
 ```bash
-IOTHUB_CONNSTR=HostName=poorlyfundedskynet.azure-devices.net;DeviceId=botnet;SharedAccessKey=123TheSecretKey321=
+IOTHUB_CONNSTR=HostName=IOTHUB_INSTANCE_NAME.azure-devices.net;DeviceId=botnet;SharedAccessKey=123TheSecretKey321=
 ```
 
 `npm start` or `node app.js` to start listening to Azure IoT Hub for direct methods.
