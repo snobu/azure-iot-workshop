@@ -15,6 +15,8 @@
 └── packet-capture    # A raw packet capture for HTTP, AMQP and MQTT after TLS decryption
 ```
 
+The DevKitState Device Twin demo is available at https://github.com/DevKitExamples/DevKitState.
+
 The hands-on lab is available at https://github.com/snobu/azureiothol201.
 
 Unless otherwise noted, all C# code in this repo runs on .NET Core.
