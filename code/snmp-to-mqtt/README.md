@@ -1,6 +1,6 @@
 This is a .NET Core fork of Stepan's SNMPToAzure project available at https://github.com/bechynsky/SNMPToAzure.
 
-Addd an `.env` file with:
+Configuration is controlled by an `.env` file that you have to create:
 
 ```sh
 DEVICE_ID=your-device-id
