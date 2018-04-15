@@ -81,8 +81,8 @@ function captureAndUpload(request, response) {
     });
     capture = setInterval(() => {
         // Use in-memory /tmp as tmpfs on the Pi. Add this line to /etc/fstab and reboot:
-        //     tmpfs /var/tmp tmpfs nodev,nosuid,size=50M 0 0
-        // That's 50 MB of "RAM drive" in /var/tmp.
+        //     tmpfs /tmp tmpfs nodev,nosuid,size=50M 0 0
+        // That's 50 MB of "RAM drive" in /tmp.
         webcam.capture('/tmp/in_memory_image', function (err, data) {
             if (fbi) {
                 exec('fbi -T 1 --noverbose -t 2 -1 -a -d /dev/fb0 ' +
