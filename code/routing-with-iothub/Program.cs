@@ -6,7 +6,6 @@ using System.Text;
 
 namespace routing_with_iothub
 {
-
     class Program
     {
         // Your DeviceId goes here
